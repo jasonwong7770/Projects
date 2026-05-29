@@ -1,8 +1,19 @@
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import Home from './pages/Home'
+import Signup from './pages/Signup'
+import Login from './pages/Login'
+import Verify from './pages/Verify'
+
 function App() {
   return (
-    <div>
-      <h1>Hello</h1>
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Home/>} />
+        <Route path="/signup" element={<Signup/>} />
+        <Route path="/verify" element={<Verify/>} />
+        <Route path="/login" element={<Login/>} />
+      </Routes>
+    </BrowserRouter>
   )
 }
 
