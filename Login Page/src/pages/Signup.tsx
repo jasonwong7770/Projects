@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Link } from 'react-router-dom'
+import { supabase } from '../lib/supabase'
 
 function Signup() {
   const [username, setUsername] = useState('')
@@ -10,8 +11,8 @@ function Signup() {
   const [error, setError] = useState('')
   const navigate = useNavigate()
 
-  function handleSubmit() {
-    console.log(username, email, password)
+async function handleSubmit() {
+    console.log(username, email, password)  
     if (! /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
       setError("Invalid email")
     } else if (password.length < 8){
