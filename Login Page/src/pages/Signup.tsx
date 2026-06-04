@@ -20,7 +20,9 @@ function Signup() {
     } else if (password !== passwordConfirm) {
       setError("Confirmation password does not match with original password")
     } else {
-      const { error: signUpError } = await supabase.auth.signUp({email, password}) // MISSING USERNAME
+      console.log('calling supabase with', email, password)
+      const { error: signUpError } = await supabase.auth.signUp({email, password})
+      console.log('supabase response:', signUpError)
       if (signUpError) {
         setError(signUpError.message)
         return
