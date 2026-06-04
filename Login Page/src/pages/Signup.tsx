@@ -11,7 +11,7 @@ function Signup() {
   const [error, setError] = useState('')
   const navigate = useNavigate()
 
-async function handleSubmit() {
+  async function handleSubmit() {
     console.log(username, email, password)  
     if (! /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
       setError("Invalid email")
@@ -20,10 +20,7 @@ async function handleSubmit() {
     } else if (password !== passwordConfirm) {
       setError("Confirmation password does not match with original password")
     } else {
-      const { error: signUpError } = await supabase.auth.signUp({
-        email,
-        password,
-      })
+      const { error: signUpError } = await supabase.auth.signUp({email, password}) // MISSING USERNAME
       if (signUpError) {
         setError(signUpError.message)
         return
