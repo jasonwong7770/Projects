@@ -20,6 +20,14 @@ async function handleSubmit() {
     } else if (password !== passwordConfirm) {
       setError("Confirmation password does not match with original password")
     } else {
+      const { error: signUpError } = await supabase.auth.signUp({
+        email,
+        password,
+      })
+      if (signUpError) {
+        setError(signUpError.message)
+        return
+      }
       navigate('/verify', {
         state: { username, email }
       })
