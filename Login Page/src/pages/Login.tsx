@@ -1,14 +1,26 @@
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { useState } from 'react'
+import { supabase } from '../lib/supabase'
 
 function Login(){
   const [identifier, setIdentifier] = useState('')
   const [password, setPassword] = useState('')
   const [error, setError] = useState('')
+  const navigate = useNavigate()
 
-  function handleLogin() {
-    console.log(identifier, password)
+  async function handleLogin() {
+  const { error: loginError } = await supabase.auth.signInWithPassword({
+    email: identifier,
+    password,
+  })
+
+  if (loginError) {
+    setError(loginError.message)
+    return
   }
+
+  navigate('/')
+}
 
   return (
     <div>
